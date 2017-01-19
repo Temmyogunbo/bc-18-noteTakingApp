@@ -1,4 +1,3 @@
-//var app = require('./logic')
 var app = require('./noteClass.js');
 const vorpal = require('vorpal')();
 vorpal
@@ -10,31 +9,12 @@ vorpal
   	this.log("You have one note created")
     callback();
   });
-
 vorpal
   .command('listNotes')
   .action(function(callback) {
     this.log("Listing your notes")
-  	app.Notes("").listNotes().result.keys
-    callback();
+  	var note = new app.Notes("").listNotes();
   });
-
-
 vorpal
   .delimiter('Mynote$:')
   .show()
-
-
-
-// const vorpal = require('vorpal')();
- 
-// vorpal
-//   .command('foo', 'Outputs "bar".')
-//   .action(function(args, callback) {
-//     this.log('bar');
-//     callback();
-//   });
- 
-// vorpal
-//   .delimiter('myapp$')
-//   .show();

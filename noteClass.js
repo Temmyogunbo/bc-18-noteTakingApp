@@ -12,10 +12,6 @@ var config =
 
 var app = require('./noteClass.js');
 function Notes(contents){
-  // if(!contents)
-  // {
-  //   throw new Error("Enter the contents of your note")
-  // }
   this.contents = contents;
 }
 Notes.prototype.createNote=function(contents)
@@ -24,14 +20,16 @@ Notes.prototype.createNote=function(contents)
     });
 }
 Notes.prototype.listNotes = function (){
-
-  var ref = database.child('note').on('value', function(snap) {
-      var result = snap.val();
-  });
+   var query = firebase.database().ref("note");
+    query.once("value").then(function(snapshot){
+        var count = 1 ;
+        var data=snapshot.val();
+        snapshot.forEach(function(childSnapshot){
+          console.log("\t" + count + " - " + childSnapshot.key + " " + data[childSnapshot.key].content);
+          ++count ;
+        });
+        process.exit();
+        
+      });
 }
-
-  /*for (var i=0; i < this.notes.length; i++)
-  return "note_id: " + i + '\n' + this.note[i];
-*/
-
 module.exports = {Notes: Notes};
