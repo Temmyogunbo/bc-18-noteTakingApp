@@ -1,16 +1,15 @@
+require('dotenv').config()
 var firebase = require('firebase');
 var config = 
  {
-    apiKey: "AIzaSyDjv5X95Er3PDb6paAc0iDkiTdfGzK-glA",
-    authDomain: "notetakingapp-3a885.firebaseapp.com",
-    databaseURL: "https://notetakingapp-3a885.firebaseio.com",
-    storageBucket: "notetakingapp-3a885.appspot.com",
-    messagingSenderId: "270142462172"
+   apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId:process.env.messagingSenderId,
   };
   firebase.initializeApp(config);
   var database = firebase.database();
-
-var app = require('./noteClass.js');
 function Notes(contents){
   this.contents = contents;
 }
@@ -28,14 +27,26 @@ Notes.prototype.listNotes = function (){
           console.log("\t" + count + " - " + childSnapshot.key + " " + data[childSnapshot.key].content);
           ++count ;
         });
-        process.exit();
       });
 }
 Notes.prototype.viewNote = function(note_id){
+  note_id = "-" + note_id
   var query = database.ref("note");
-  query.on("value", function(note_id){
-    var data = note_id.val();
-    console.log("You wrote the note " + data.content)
+  query.on("value", function(snapshot)
+  {
+    var data = snapshot.val();
+    var keystore = [];
+    for(var i in data)
+    {
+      keystore.push(i);
+    }
+    for (var i = 0; i < keystore.length; i++)
+    {
+      if(keystore[i] === note_id){
+        console.log("You wrote the note " + data[note_id].content);
+        break;
+      }
+    }   
   })
 }
 module.exports = {Notes: Notes};
