@@ -20,8 +20,8 @@ Notes.prototype.createNote=function(contents)
     });
 }
 Notes.prototype.listNotes = function (){
-   var query = firebase.database().ref("note");
-    query.once("value").then(function(snapshot){
+   var query = database.ref("note");
+    query.on("value", function(snapshot){
         var count = 1 ;
         var data=snapshot.val();
         snapshot.forEach(function(childSnapshot){
@@ -29,7 +29,13 @@ Notes.prototype.listNotes = function (){
           ++count ;
         });
         process.exit();
-        
       });
+}
+Notes.prototype.viewNote = function(note_id){
+  var query = firebase.database.ref("note");
+  query.once("value", function(note_id){
+    var data = note_id.val();
+    console.log("You wrote the note " + data.content)
+  })
 }
 module.exports = {Notes: Notes};
