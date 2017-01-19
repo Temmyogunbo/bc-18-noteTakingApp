@@ -1,5 +1,5 @@
 var app = require('./noteClass.js');
-const vorpal = require('vorpal')();
+var vorpal = require('vorpal')();
 vorpal
   .command('createNote <contents>', 'Output "contents"')
   .action(function(args, callback) {

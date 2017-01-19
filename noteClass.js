@@ -32,8 +32,8 @@ Notes.prototype.listNotes = function (){
       });
 }
 Notes.prototype.viewNote = function(note_id){
-  var query = firebase.database.ref("note");
-  query.once("value", function(note_id){
+  var query = database.ref("note");
+  query.on("value", function(note_id){
     var data = note_id.val();
     console.log("You wrote the note " + data.content)
   })
