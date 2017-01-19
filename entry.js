@@ -16,5 +16,13 @@ vorpal
   	var note = new app.Notes("").listNotes();
   });
 vorpal
+  .command('viewNote <note_id>', 'Output "note_id"')
+  .action(function(args, callback) {
+    var note = new app.Notes(args.note_id)
+    note.viewNote(args.note_id)
+    this.log("You have one note viewed")
+    callback();
+  });
+vorpal
   .delimiter('Mynote$:')
   .show()
