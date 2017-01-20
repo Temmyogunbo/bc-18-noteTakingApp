@@ -1,5 +1,6 @@
 # bc-18-noteTakingApp
 Getting Started
+
 The note taking application is a console application that allows users to create notes, list notes, view single notes and do host of other things through the command prompt.
 The application is written in javascript programming language with a server side framework-node.js. 
 Vorpal module is used to specifically customize the command prompt and make it more interactive.
