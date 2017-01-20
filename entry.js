@@ -1,7 +1,7 @@
 var app = require('./noteClass.js');
-var vorpal = require('vorpal')();
+var vorpal = require('vorpal')();  //Vorpal command to customize the command prompt
 vorpal
-  .command('createNote <contents>', 'Output "contents"')
+  .command('createNote <contents>', 'Output "contents"')  //A creteNote command
   .action(function(args, callback) {
   	var note = new app.Notes(args.contents)
   	this.log(args.contents);
@@ -10,17 +10,16 @@ vorpal
     callback();
   });
 vorpal
-  .command('listNotes')
+  .command('listNotes')         //A listNote command
   .action(function(callback) {
     this.log("Listing your notes")
   	var note = new app.Notes("").listNotes();
   });
 vorpal
-  .command('viewNote <note_id>', 'Output "note_id"')
+  .command('viewNote <note_id>', 'Output "note_id"')  //A viewNote command
   .action(function(args, callback) {
     var note = new app.Notes(args.note_id)
     note.viewNote(args.note_id)
-    this.log("You have one note viewed")
     callback();
   });
 vorpal
