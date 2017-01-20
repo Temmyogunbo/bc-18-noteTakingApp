@@ -2,7 +2,8 @@
 Getting Started
 The note taking application is a console application that allows users to create notes, list notes, view single notes and do host of other things through the command prompt.
 The application is written in javascript programming language with a server side framework-node.js. 
-The vorpal module is used to specifically customize the command prompt and make it more interactive.
+Vorpal module is used to specifically customize the command prompt and make it more interactive.
+
 The firebase, a NoSQL type of database is used to store the contents of users notes.
 To retrieve notes and delete notes a unique key from the firebase has to be used as such, users are expected to list notes before they can delete or view a single note.
 
